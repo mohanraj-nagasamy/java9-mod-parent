@@ -4,7 +4,6 @@ package com.test.mo_child_cli;
 import com.test.mo_child_api.api.ClassA;
 import com.test.mo_child_api.api.SomeService;
 import com.test.mo_child_api.model.Person;
-//import com.test.mo_child_api.internal.ClassInternal;
 
 import java.util.ServiceLoader;
 import java.util.logging.Logger;
@@ -15,6 +14,12 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
+        serviceLoader();
+
+//        reflections();
+    }
+
+    private static void reflections() throws Exception {
         ClassA classA = new ClassA();
         Object newInstance = Class.forName("com.test.mo_child_api.internal.ClassInternal")
                 .getDeclaredConstructor()
@@ -28,8 +33,6 @@ public class App {
 
         int yearPublic = classA.yearPublic;
         logger.info("yearPublic = " + yearPublic);
-
-        serviceLoader();
     }
 
     static void serviceLoader() {
