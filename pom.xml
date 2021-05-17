@@ -7,13 +7,33 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>java9-mod-parent</name>
+
     <properties>
         <java.version>15</java.version>
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
     </properties>
+
     <modules>
-        <module>mo-child-cli</module>
         <module>mo-child-api</module>
+        <module>mo-child-cli</module>
         <module>mo-child-service-impl-1</module>
         <module>mo-child-service-impl-2</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>

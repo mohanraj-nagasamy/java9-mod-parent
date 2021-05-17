@@ -1,4 +1,4 @@
-package com.test.mo_child_api;
+package com.test.mo_child_api.api;
 
 public class ClassA {
     public int yearPublic = 2021;

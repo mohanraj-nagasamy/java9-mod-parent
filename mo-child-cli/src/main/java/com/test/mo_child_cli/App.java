@@ -1,12 +1,45 @@
 package com.test.mo_child_cli;
 
-import com.test.mo_child_api.ClassA;
+
+import com.test.mo_child_api.api.ClassA;
+import com.test.mo_child_api.api.SomeService;
+import com.test.mo_child_api.model.Person;
+//import com.test.mo_child_api.internal.ClassInternal;
+
+import java.util.ServiceLoader;
+import java.util.logging.Logger;
 
 public class App {
-    public static void main(String[] args) {
+
+    static Logger logger = Logger.getLogger(App.class.getName());
+
+    public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
         ClassA classA = new ClassA();
+        Object newInstance = Class.forName("com.test.mo_child_api.internal.ClassInternal")
+                .getDeclaredConstructor()
+                .newInstance();
+        System.out.println("newInstance = " + newInstance);
+
+        Person person = new Person("name", 12);
+        System.out.println("person = " + person);
+//        ClassInternal classInternal = new ClassInternal();
+//        System.out.println("classInternal = " + classInternal);
+
         int yearPublic = classA.yearPublic;
-        System.out.println("yearPublic = " + yearPublic);
+        logger.info("yearPublic = " + yearPublic);
+
+        serviceLoader();
+    }
+
+    static void serviceLoader() {
+        System.out.println("App.serviceLoader");
+        Iterable<SomeService> someServices = ServiceLoader.load(SomeService.class);
+
+        someServices.forEach(someService -> {
+            String someThing = someService.giveMeSomeThing();
+            System.out.println("someThing = " + someThing);
+        });
+
     }
 }
